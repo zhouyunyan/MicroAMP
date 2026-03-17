@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Microbiome AMP Resource Hub</title>
+  <style>
+    :root{
+      /* Light theme */
+      --bg:#f6f8fc;
+      --txt:#17212b;
+      --muted:#56657a;
+      --line:#d7dfec;
+      --chip:#eaf1ff;
+      --chipActive:#dbe9ff;
+      --card:#ffffff;
+      --card2:#fbfcff;
+      --accent:#2b6fff;
+      --accent2:#5a8bff;
+      --shadow: 0 10px 30px rgba(20,40,80,.08);
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      background:
+        radial-gradient(900px 520px at 15% 0%, rgba(43,111,255,.10), transparent 60%),
+        radial-gradient(800px 420px at 95% 10%, rgba(90,139,255,.10), transparent 55%),
+        var(--bg);
+      color:var(--txt);
+    }
+    a{ color:var(--accent); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    .wrap{ max-width:1100px; margin:0 auto; padding:26px 18px 70px; }
+
+    /* Top bar */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin-bottom:14px;
+    }
+    .brand{ display:flex; align-items:center; gap:10px; }
+    .brand .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 14px rgba(43,111,255,.25);
+    }
+    .brand strong{ letter-spacing:.2px; }
+    .small{ font-size:12.5px; color: var(--muted); }
+    .nav{ display:flex; gap:8px; flex-wrap:wrap; }
+    .nav a{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.65);
+      color: var(--muted);
+      font-size:13px;
+    }
+    .nav a:hover{ color:var(--txt); border-color: rgba(43,111,255,.35); }
+
+    /* Hero */
+    .hero{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px 18px 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.72));
+      box-shadow: var(--shadow);
+    }
+    h1{ margin:0 0 6px; font-size:26px; letter-spacing:.2px; }
+    .sub{ margin:0; color:var(--muted); line-height:1.7; }
+    .metaRow{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; align-items:center;
+      color:var(--muted); font-size:13px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.75);
+    }
+    .pill code{
+      background: rgba(43,111,255,.10);
+      padding:2px 6px;
+      border-radius:6px;
+      color: var(--txt);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+    }
+
+    /* Search + chips */
+    .bar{ display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 10px; }
+    .search{ flex:1 1 340px; }
+    input[type="search"]{
+      width:100%;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.90);
+      color: var(--txt);
+      outline:none;
+      box-shadow: 0 6px 20px rgba(20,40,80,.06);
+    }
+    input[type="search"]::placeholder{ color: rgba(86,101,122,.85); }
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .chip{
+      padding:9px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.75);
+      color: var(--muted);
+      cursor:pointer;
+      user-select:none;
+      font-size:13px;
+    }
+    .chip.active{
+      background: var(--chipActive);
+      color: var(--txt);
+      border-color: rgba(43,111,255,.35);
+      box-shadow: 0 0 0 3px rgba(43,111,255,.10) inset;
+    }
+
+    /* Sections */
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
+      margin-top:18px;
+    }
+    h2{ margin:0; font-size:18px; letter-spacing:.2px; }
+    .stats{
+      color: var(--muted);
+      font-size:13px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.80);
+    }
+
+    /* Tables */
+    .card{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background: var(--card);
+      overflow:hidden;
+      margin-top:10px;
+      box-shadow: var(--shadow);
+    }
+    table{ width:100%; border-collapse:collapse; }
+    th, td{
+      padding:10px 10px;
+      border-bottom:1px solid rgba(215,223,236,.75);
+      vertical-align:top;
+    }
+    th{
+      text-align:left;
+      color: var(--muted);
+      font-weight:700;
+      font-size:13px;
+      background: #f4f7ff;
+    }
+    td{ font-size:14px; line-height:1.55; color: var(--txt); }
+    .tag{
+      display:inline-block;
+      font-size:12px;
+      padding:2px 8px;
+      border:1px solid rgba(43,111,255,.18);
+      border-radius:999px;
+      color: rgba(43,111,255,.90);
+      margin-right:6px;
+      background: rgba(43,111,255,.06);
+    }
+    .empty{
+      color: var(--muted);
+      padding: 14px 10px;
+      font-size: 13px;
+      display:none;
+    }
+
+    /* Footer blocks */
+    .foot{
+      margin-top:18px;
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.7;
+      border:1px solid var(--line);
+      background: var(--card2);
+      border-radius:16px;
+      padding:12px 12px;
+      box-shadow: var(--shadow);
+    }
+    .foot ul{ margin: 8px 0 0 18px; }
+
+    /* Paper info (at bottom) */
+    .paper{
+      border:1px solid var(--line);
+      background: var(--card2);
+      border-radius:16px;
+      padding:14px 12px;
+      margin-top:18px;
+      box-shadow: var(--shadow);
+    }
+    .paper h3{
+      margin:0 0 8px;
+      font-size:15px;
+      letter-spacing:.2px;
+      color: var(--txt);
+    }
+    .kv{
+      display:grid;
+      grid-template-columns: 92px 1fr;
+      gap:6px 10px;
+      font-size:13px;
+      line-height:1.7;
+      color: var(--muted);
+    }
+    .kv b{ color: var(--txt); font-weight:700; }
+    .btnRow{
+      display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.90);
+      color: var(--txt);
+      font-size:13px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{ border-color: rgba(43,111,255,.35); }
+    .btn.secondary{ color: var(--muted); }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot"></span>
+        <strong>Microbiome AMP Hub</strong>
+        <span class="small">· Tools & Databases</span>
+      </div>
+      <div class="nav">
+        <a href="#tools">Tools</a>
+        <a href="#databases">Databases</a>
+        <a href="#paper">Paper</a>
+        <a href="#about">About</a>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <h1>Microbiome AMP Resource Hub</h1>
+      <p class="sub">
+        汇总微生物组抗菌肽挖掘与预测常用工具及主要抗菌肽数据库，提供一键直达链接与简要说明，便于快速检索与使用。
+      </p>
+      <div class="metaRow">
+        <span class="pill">更新日期：<code id="updated">2026-03-17</code></span>
+        <span class="pill">版本：<code>v1.0</code></span>
+      </div>
+    </div>
+
+    <!-- Search + chips -->
+    <div class="bar" id="tools">
+      <div class="search">
+        <input id="q" type="search" placeholder="搜索：名称、功能、关键词（例如 Macrel、dbAMP、toxicity、MAGs…）" />
+      </div>
+      <div class="chips" id="chips">
+        <span class="chip active" data-stage="ALL">全部</span>
+        <span class="chip" data-stage="ORF/smORF">ORF/smORF</span>
+        <span class="chip" data-stage="AMP prediction">AMP预测</span>
+        <span class="chip" data-stage="Clustering">去冗余/聚类</span>
+        <span class="chip" data-stage="Similarity">相似性检索</span>
+        <span class="chip" data-stage="Structure">结构/机制</span>
+        <span class="chip" data-stage="Generation">生成设计</span>
+        <span class="chip" data-stage="Database">数据库</span>
+      </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="sectionHead">
+      <h2>Tools</h2>
+      <div class="stats">
+        <span class="badge">Tools: <b id="countTools">—</b></span>
+        <span class="badge">Filtered: <b id="countToolsFiltered">—</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <table id="toolsTable">
+        <thead>
+          <tr>
+            <th style="width:18%">Tool</th>
+            <th style="width:18%">Function</th>
+            <th>Methodological Features</th>
+            <th style="width:22%">Applicable Scenarios</th>
+            <th style="width:10%">Website</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="toolsEmpty" class="empty">No matching tools.</div>
+    </div>
+
+    <!-- Databases -->
+    <div class="sectionHead" id="databases" style="margin-top:18px;">
+      <h2>Databases</h2>
+      <div class="stats">
+        <span class="badge">Databases: <b id="countDb">—</b></span>
+        <span class="badge">Filtered: <b id="countDbFiltered">—</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <table id="dbTable">
+        <thead>
+          <tr>
+            <th style="width:18%">Database</th>
+            <th style="width:10%">Entries</th>
+            <th style="width:14%">Accessibility</th>
+            <th style="width:16%">Website</th>
+            <th style="width:14%">Latest Update</th>
+            <th>Core Functions & Coverage</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="dbEmpty" class="empty">No matching databases.</div>
+    </div>
+
+    <!-- About -->
+    <div class="foot" id="about">
+      <div><b>About this page</b></div>
+      <ul>
+        <li>本页为静态资源导航（GitHub Pages），用于集中展示论文中汇总的工具与数据库入口，便于检索与使用。</li>
+        <li>标注为 <b>No (Historical)</b> 的数据库可能已停止维护或无法访问，仍保留用于溯源与文献对照。</li>
+      </ul>
+    </div>
+
+    <!-- Paper information (bottom) -->
+    <div class="paper" id="paper">
+      <h3>Paper information</h3>
+      <div class="kv">
+        <div>Title</div>
+        <div><b>基于人工智能技术挖掘微生物组中的抗菌肽</b></div>
+
+        <div>Authors</div>
+        <div><b>郭筱雅#，莫楠楠#，付腾腾#，赖倚琼，侯心怡，周云燕*</b></div>
+
+        <div>Affiliation</div>
+        <div><b>浙江工业大学药学院、绿色制药协同创新中心</b></div>
+
+        <div>Journal</div>
+        <div>《生物工程学报》</div>
+
+        <div>Link</div>
+        <div class="small">（在文章接收后补充 DOI/正式引文信息）</div>
+      </div>
+
+      <div class="btnRow">
+        <button class="btn" id="copyCiteBtn" type="button" title="Copy citation">Copy citation</button>
+        <button class="btn secondary" id="downloadToolsBtn" type="button" title="Download tools as CSV">Download tools.csv</button>
+        <button class="btn secondary" id="downloadDbBtn" type="button" title="Download databases as CSV">Download databases.csv</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // =========================
+  // Data (Ref 字段已删除)
+  // =========================
+  const tools = [
+    {
+      stage: ["AMP prediction"],
+      tool: "AMP Scanner v2",
+      function: "Antimicrobial peptide prediction",
+      features: "Deep Neural Network (CNN + Bi-LSTM), automatic feature learning, high prediction confidence.",
+      scenarios: "Scenarios requiring high-precision screening and priority ranking.",
+      website: "https://www.dveltri.com/ascan/v2/"
+    },
+    {
+      stage: ["AMP prediction"],
+      tool: "Macrel",
+      function: "Antimicrobial peptide prediction",
+      features: "Random Forest classifier based on 22 refined features, end-to-end pipeline, conservative predictions.",
+      scenarios: "Systematic preliminary mining with low false positives in complex data like metagenomes.",
+      website: "https://github.com/BigDataBiology/macrel"
+    },
+    {
+      stage: ["AMP prediction"],
+      tool: "AmPEP",
+      function: "Antimicrobial peptide prediction",
+      features: "Employs 105 distribution descriptors and Random Forest algorithm, suitable for scenarios requiring physicochemical understanding and strong feature interpretability.",
+      scenarios: "Prediction scenarios requiring understanding of physicochemical property contributions, providing a unique analytical perspective.",
+      website: "https://github.com/tlawrence3/amPEPpy"
+    },
+    {
+      stage: ["ORF/smORF"],
+      tool: "Prodigal",
+      function: "Gene prediction and ORF identification",
+      features: "Efficient prokaryotic gene prediction algorithm based on dynamic programming.",
+      scenarios: "The first step in processing prokaryotic genome or metagenome-assembled sequences.",
+      website: "https://github.com/hyattpd/Prodigal"
+    },
+    {
+      stage: ["ORF/smORF"],
+      tool: "SmORFinder",
+      function: "SmORF prediction and annotation",
+      features: "Combines Hidden Markov Models with deep learning models.",
+      scenarios: "Specifically identifies smORFs that may encode functional small peptides (e.g., antimicrobial peptides).",
+      website: "https://github.com/bhattlab/SmORFinder"
+    },
+    {
+      stage: ["Clustering"],
+      tool: "CD-HIT",
+      function: "Sequence clustering and redundancy removal",
+      features: "Fast clustering algorithm based on short word filtering, efficient for large-scale sequence processing.",
+      scenarios: "Redundancy removal for massive sequences before or after prediction to reduce computational burden.",
+      website: "http://weizhong-lab.ucsd.edu/cdhit_suite"
+    },
+    {
+      stage: ["Similarity"],
+      tool: "BLAST",
+      function: "Sequence alignment and similarity search",
+      features: "Classic heuristic algorithm based on local alignment.",
+      scenarios: "Assessing sequence novelty, functional annotation, and homologous sequence search.",
+      website: "https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/"
+    },
+    {
+      stage: ["Structure"],
+      tool: "ColabFold",
+      function: "Protein structure prediction",
+      features: "Integrates MMseqs2 for fast homology search with AlphaFold2/RoseTTAFold.",
+      scenarios: "Scenarios requiring efficient, free, and batch protein structure prediction.",
+      website: "https://github.com/sokrypton/ColabFold"
+    },
+    {
+      stage: ["Structure"],
+      tool: "RoseTTAFold2",
+      function: "Protein structure prediction",
+      features: "Neural network based on a three-track architecture, offering a good balance between accuracy and speed.",
+      scenarios: "Predicting protein monomer and complex structures, particularly adept at large complexes.",
+      website: "https://github.com/uw-ipd/RoseTTAFold2"
+    },
+    {
+      stage: ["Structure"],
+      tool: "AlphaFold3",
+      function: "Protein structure prediction",
+      features: "Next-generation diffusion model capable of predicting complexes including proteins, nucleic acids, and small molecule ligands.",
+      scenarios: "Predicting complex biomolecular structures and interactions involving non-protein components.",
+      website: "https://github.com/google-deepmind/alphafold3"
+    }
+  ];
+
+  const databases = [
+    {
+      stage: ["Database"],
+      db: "CAMP-R4",
+      entries: "11827",
+      access: "Yes",
+      website: "http://camp.bicnirrh.res.in/",
+      update: "2022",
+      coverage: "Comprehensive database and prediction platform, covering natural and synthetic peptides."
+    },
+    {
+      stage: ["Database"],
+      db: "dbAMP",
+      entries: "35518",
+      access: "Yes",
+      website: "https://awi.cuhk.edu.cn/dbAMP/",
+      update: "2024",
+      coverage: "Comprehensive database and multifunctional platform, integrating a full suite of tools for discovery, prediction, optimization, and toxicity assessment."
+    },
+    {
+      stage: ["Database"],
+      db: "DBAASP",
+      entries: "23688",
+      access: "Yes",
+      website: "https://www.dbaasp.org/home",
+      update: "--",
+      coverage: "Experimental activity and structural information database, providing detailed experimental data such as antimicrobial, hemolytic, and cytotoxic activities."
+    },
+    {
+      stage: ["Database"],
+      db: "AMPSphere",
+      entries: "863498",
+      access: "Yes",
+      website: "https://ampsphere.big-data-biology.org/",
+      update: "2024",
+      coverage: "Metagenome-derived antimicrobial peptide database, sourced from large-scale global microbiome mining."
+    },
+    {
+      stage: ["Database"],
+      db: "DRAMP",
+      entries: "30260",
+      access: "Yes",
+      website: "http://dramp.cpu-bioinfor.org/",
+      update: "2023",
+      coverage: "General comprehensive antimicrobial peptide database, containing information on natural, synthetic, and clinically investigational peptides."
+    },
+    {
+      stage: ["Database"],
+      db: "APD",
+      entries: "6309",
+      access: "Yes",
+      website: "https://aps.unmc.edu",
+      update: "Continuously Updated",
+      coverage: "Comprehensive database focused on natural antimicrobial peptides, containing detailed sequence, activity, and structural annotations."
+    },
+    {
+      stage: ["Database"],
+      db: "Cybase",
+      entries: "--",
+      access: "Yes",
+      website: "https://www.cybase.org.au",
+      update: "2026-02-09",
+      coverage: "Specialized database for cyclic peptides (rich in disulfide bonds)."
+    },
+    {
+      stage: ["Database"],
+      db: "PlantPepDB",
+      entries: "3848",
+      access: "Yes",
+      website: "http://14.139.61.8/PlantPepDB/index.php",
+      update: "2020",
+      coverage: "Specialized database for plant-derived antimicrobial peptides."
+    },
+    {
+      stage: ["Database"],
+      db: "BaAMPs",
+      entries: "221",
+      access: "No (Historical)",
+      website: "http://www.baamps.it",
+      update: "--",
+      coverage: "Database for antimicrobial peptides with biofilm-inhibiting activity."
+    },
+    {
+      stage: ["Database"],
+      db: "BACTIBASE",
+      entries: "123",
+      access: "No (Historical)",
+      website: "http://bactibase.pfba-lab-tun.org",
+      update: "--",
+      coverage: "Database for bacteriocins (primarily targeting Gram-positive bacteria)."
+    },
+    {
+      stage: ["Database"],
+      db: "YADAMP",
+      entries: "2133",
+      access: "Limited Functionality",
+      website: "http://www.yadamp.unisa.it",
+      update: "--",
+      coverage: "General antimicrobial peptide database, providing only data browsing."
+    },
+    {
+      stage: ["Database"],
+      db: "CAMP (Old version)",
+      entries: "10247",
+      access: "No (Historical)",
+      website: "http://camp.bicnirrh.res.in/",
+      update: "--",
+      coverage: "Early general antimicrobial peptide database."
+    },
+    {
+      stage: ["Database"],
+      db: "DAMPD",
+      entries: "2571",
+      access: "No (Historical)",
+      website: "http://apps.sanbi.ac.za/dampd/",
+      update: "--",
+      coverage: "Early antimicrobial peptide database."
+    },
+    {
+      stage: ["Database"],
+      db: "LAMP",
+      entries: "5547",
+      access: "No (Historical)",
+      website: "http://biotechlab.fudan.edu.cn/database/lamp",
+      update: "--",
+      coverage: "Early antimicrobial peptide database."
+    }
+  ];
+
+  // =========================
+  // Helpers
+  // =========================
+  function esc(s){
+    return String(s ?? "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  function blobTool(r){
+    return `${r.tool} ${r.function} ${r.features} ${r.scenarios} ${r.website} ${r.stage.join(" ")}`.toLowerCase();
+  }
+  function blobDB(r){
+    return `${r.db} ${r.entries} ${r.access} ${r.website} ${r.update} ${r.coverage}`.toLowerCase();
+  }
+
+  function toCSV(rows, headers){
+    const escapeCSV = (v) => {
+      const s = String(v ?? "");
+      if (/[",\n]/.test(s)) return `"${s.replaceAll('"','""')}"`;
+      return s;
+    };
+    const lines = [];
+    lines.push(headers.map(h => escapeCSV(h.label)).join(","));
+    rows.forEach(r => lines.push(headers.map(h => escapeCSV(r[h.key])).join(",")));
+    return lines.join("\n");
+  }
+
+  function downloadText(filename, text){
+    const blob = new Blob([text], {type:"text/csv;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // =========================
+  // Rendering
+  // =========================
+  let lastToolsFiltered = [];
+  let lastDbFiltered = [];
+
+  function render(){
+    const q = document.getElementById("q").value.trim().toLowerCase();
+    const activeChip = document.querySelector(".chip.active").dataset.stage;
+    const matchStage = (rowStages) => (activeChip === "ALL") || rowStages.includes(activeChip);
+
+    // Tools
+    const toolsBody = document.querySelector("#toolsTable tbody");
+    toolsBody.innerHTML = "";
+
+    const toolsFiltered = tools
+      .filter(r => matchStage(r.stage))
+      .filter(r => blobTool(r).includes(q));
+    lastToolsFiltered = toolsFiltered;
+
+    const toolsEmpty = document.getElementById("toolsEmpty");
+    if (toolsFiltered.length === 0){
+      toolsEmpty.style.display = "block";
+    } else {
+      toolsEmpty.style.display = "none";
+      toolsFiltered.forEach(r => {
+        const tags = r.stage.map(s => `<span class="tag">${esc(s)}</span>`).join(" ");
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${tags}<div style="margin-top:6px;font-weight:800;">${esc(r.tool)}</div></td>
+          <td>${esc(r.function)}</td>
+          <td>${esc(r.features)}</td>
+          <td>${esc(r.scenarios)}</td>
+          <td><a href="${esc(r.website)}" target="_blank" rel="noopener">Link</a></td>
+        `;
+        toolsBody.appendChild(tr);
+      });
+    }
+
+    // Databases
+    const dbBody = document.querySelector("#dbTable tbody");
+    dbBody.innerHTML = "";
+
+    const dbFiltered = databases
+      .filter(r => matchStage(r.stage))
+      .filter(r => blobDB(r).includes(q));
+    lastDbFiltered = dbFiltered;
+
+    const dbEmpty = document.getElementById("dbEmpty");
+    if (dbFiltered.length === 0){
+      dbEmpty.style.display = "block";
+    } else {
+      dbEmpty.style.display = "none";
+      dbFiltered.forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><span class="tag">Database</span><div style="margin-top:6px;font-weight:800;">${esc(r.db)}</div></td>
+          <td>${esc(r.entries)}</td>
+          <td>${esc(r.access)}</td>
+          <td><a href="${esc(r.website)}" target="_blank" rel="noopener">Link</a></td>
+          <td>${esc(r.update)}</td>
+          <td>${esc(r.coverage)}</td>
+        `;
+        dbBody.appendChild(tr);
+      });
+    }
+
+    // counts
+    document.getElementById("countTools").textContent = tools.length;
+    document.getElementById("countDb").textContent = databases.length;
+    document.getElementById("countToolsFiltered").textContent = toolsFiltered.length;
+    document.getElementById("countDbFiltered").textContent = dbFiltered.length;
+  }
+
+  // =========================
+  // Interactions
+  // =========================
+  document.getElementById("q").addEventListener("input", render);
+  document.querySelectorAll(".chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      render();
+    });
+  });
+
+  // Copy citation
+  document.getElementById("copyCiteBtn").addEventListener("click", async () => {
+    const citation = [
+      "郭筱雅#, 莫楠楠#, 付腾腾#, 赖倚琼, 侯心怡, 周云燕*. 基于人工智能技术挖掘微生物组中的抗菌肽. 生物工程学报.",
+      "Resource hub: <GitHub Pages URL here>."
+    ].join(" ");
+    try{
+      await navigator.clipboard.writeText(citation);
+      const btn = document.getElementById("copyCiteBtn");
+      const old = btn.textContent;
+      btn.textContent = "Copied ✓";
+      setTimeout(() => btn.textContent = old, 1200);
+    }catch(e){
+      alert("Copy failed. Please copy manually:\n\n" + citation);
+    }
+  });
+
+  // Download filtered CSV
+  document.getElementById("downloadToolsBtn").addEventListener("click", () => {
+    const rows = lastToolsFiltered.map(r => ({
+      stage: r.stage.join("; "),
+      tool: r.tool,
+      function: r.function,
+      features: r.features,
+      scenarios: r.scenarios,
+      website: r.website
+    }));
+    const csv = toCSV(rows, [
+      {key:"stage", label:"Stage"},
+      {key:"tool", label:"Tool"},
+      {key:"function", label:"Function"},
+      {key:"features", label:"Methodological Features"},
+      {key:"scenarios", label:"Applicable Scenarios"},
+      {key:"website", label:"Website"}
+    ]);
+    downloadText("tools_filtered.csv", csv);
+  });
+
+  document.getElementById("downloadDbBtn").addEventListener("click", () => {
+    const rows = lastDbFiltered.map(r => ({
+      db: r.db,
+      entries: r.entries,
+      access: r.access,
+      website: r.website,
+      update: r.update,
+      coverage: r.coverage
+    }));
+    const csv = toCSV(rows, [
+      {key:"db", label:"Database"},
+      {key:"entries", label:"Number of Entries"},
+      {key:"access", label:"Accessibility"},
+      {key:"website", label:"Website"},
+      {key:"update", label:"Latest Update"},
+      {key:"coverage", label:"Core Functions and Coverage"}
+    ]);
+    downloadText("databases_filtered.csv", csv);
+  });
+
+  render();
+</script>
+</body>
+</html>
