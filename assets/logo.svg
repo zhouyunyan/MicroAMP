@@ -1,0 +1,79 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MicroAMP · ZyyLab logo">
+  <defs>
+    <linearGradient id="bg" x1="40" y1="28" x2="220" y2="228" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2B6FFF"></stop>
+      <stop offset="1" stop-color="#5A8BFF"></stop>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#2B6FFF" flood-opacity="0.18"></feDropShadow>
+    </filter>
+  </defs>
+
+  <!-- Rounded-square background -->
+  <rect x="24" y="24" width="208" height="208" rx="52" fill="url(#bg)" filter="url(#shadow)"></rect>
+
+  <!-- subtle highlight -->
+  <path d="M58 78c22-30 60-50 102-50 14 0 28 2 40 6" stroke="white" stroke-opacity="0.22" stroke-width="12" stroke-linecap="round"></path>
+
+  <!-- interdisciplinary triangle (behind Z) -->
+  <path d="M70 76 L186 78 L128 190 Z" stroke="white" stroke-opacity="0.30" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"></path>
+
+  <!-- ===== Node 1: Microbiome (bacteria) ===== -->
+  <g>
+    <!-- node base -->
+    <circle cx="70" cy="76" r="18" fill="white" fill-opacity="0.95"></circle>
+
+    <!-- rod bacterium: bold capsule + inner septum -->
+    <rect x="56.5" y="66.5" width="24" height="12" rx="6" fill="#2B6FFF" fill-opacity="0.92"></rect>
+    <!-- inner septum line -->
+    <path d="M68.5 67.8v9.4" stroke="white" stroke-opacity="0.92" stroke-width="2.4" stroke-linecap="round"></path>
+
+    <!-- 2 cocci -->
+    <circle cx="78.5" cy="84.5" r="4.2" fill="#2B6FFF" fill-opacity="0.90"></circle>
+    <circle cx="64.5" cy="85.5" r="3.5" fill="#2B6FFF" fill-opacity="0.78"></circle>
+
+    <!-- colony hint -->
+    <circle cx="82.5" cy="72.5" r="1.8" fill="#2B6FFF" fill-opacity="0.65"></circle>
+  </g>
+
+  <!-- ===== Node 2: AMR/Resistance (drug / capsule) ===== -->
+  <g>
+    <!-- node base -->
+    <circle cx="186" cy="78" r="18" fill="white" fill-opacity="0.95"></circle>
+
+    <!-- capsule body (diagonal) -->
+    <g transform="translate(186 78) rotate(-28)">
+      <!-- outer capsule -->
+      <rect x="-12" y="-5" width="24" height="10" rx="5" fill="none" stroke="#2B6FFF" stroke-opacity="0.95" stroke-width="3.2"></rect>
+      <!-- split line -->
+      <path d="M0 -5V5" stroke="#2B6FFF" stroke-opacity="0.95" stroke-width="3.2" stroke-linecap="round"></path>
+      <!-- left fill -->
+      <rect x="-11" y="-4" width="11" height="8" rx="4" fill="#2B6FFF" fill-opacity="0.18"></rect>
+      <!-- right dots hint -->
+      <circle cx="6" cy="-1.5" r="1.2" fill="#2B6FFF" fill-opacity="0.85"></circle>
+      <circle cx="8.5" cy="1.5" r="1.2" fill="#2B6FFF" fill-opacity="0.65"></circle>
+    </g>
+  </g>
+
+  <!-- ===== Node 3: Computational (computer/monitor) ===== -->
+  <g>
+    <!-- node base -->
+    <circle cx="128" cy="190" r="18" fill="white" fill-opacity="0.95"></circle>
+
+    <!-- monitor -->
+    <rect x="116" y="180" width="24" height="16" rx="3" fill="none" stroke="#2B6FFF" stroke-opacity="0.95" stroke-width="3.2"></rect>
+    <!-- screen line -->
+    <path d="M119 188h18" stroke="#2B6FFF" stroke-opacity="0.55" stroke-width="2.6" stroke-linecap="round"></path>
+
+    <!-- stand -->
+    <path d="M128 196v6" stroke="#2B6FFF" stroke-opacity="0.95" stroke-width="3.2" stroke-linecap="round"></path>
+    <path d="M120 204h16" stroke="#2B6FFF" stroke-opacity="0.95" stroke-width="3.2" stroke-linecap="round"></path>
+  </g>
+
+  <!-- Central Z (ZyyLab) -->
+  <path d="M88 104 H168 L88 170 H168" stroke="white" stroke-opacity="0.98" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"></path>
+
+  <!-- small accent dot -->
+  <circle cx="206" cy="74" r="10" fill="white" fill-opacity="0.85"></circle>
+</svg>
