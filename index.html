@@ -3,10 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Microbiome AMP Resource Hub</title>
+  <title>MicroAMP Resource Hub</title>
   <style>
     :root{
-      /* Light theme */
       --bg:#f6f8fc;
       --txt:#17212b;
       --muted:#56657a;
@@ -38,15 +37,23 @@
       display:flex; align-items:center; justify-content:space-between; gap:12px;
       margin-bottom:14px;
     }
-    .brand{ display:flex; align-items:center; gap:10px; }
-    .brand .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 14px rgba(43,111,255,.25);
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width: 260px;
     }
-    .brand strong{ letter-spacing:.2px; }
+    .logo{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+      display:block;
+      box-shadow: 0 6px 18px rgba(43,111,255,.18);
+      flex: 0 0 auto;
+    }
+    .brandText{ display:flex; flex-direction:column; line-height:1.12; }
+    .brandText strong{ letter-spacing:.2px; font-size:15px; }
     .small{ font-size:12.5px; color: var(--muted); }
-    .nav{ display:flex; gap:8px; flex-wrap:wrap; }
+
+    .nav{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
     .nav a{
       padding:8px 10px;
       border-radius:999px;
@@ -210,7 +217,7 @@
     }
     .kv{
       display:grid;
-      grid-template-columns: 92px 1fr;
+      grid-template-columns: 110px 1fr;
       gap:6px 10px;
       font-size:13px;
       line-height:1.7;
@@ -241,9 +248,11 @@
     <!-- Top bar -->
     <div class="topbar">
       <div class="brand">
-        <span class="dot"></span>
-        <strong>Microbiome AMP Hub</strong>
-        <span class="small">· Tools & Databases</span>
+        <img class="logo" src="assets/logo.svg" alt="MicroAMP logo">
+        <div class="brandText">
+          <strong>MicroAMP</strong>
+          <span class="small">ZyyLab（周云燕课题组）</span>
+        </div>
       </div>
       <div class="nav">
         <a href="#tools">Tools</a>
@@ -351,7 +360,7 @@
         <div><b>郭筱雅#，莫楠楠#，付腾腾#，赖倚琼，侯心怡，周云燕*</b></div>
 
         <div>Affiliation</div>
-        <div><b>浙江工业大学药学院、绿色制药协同创新中心</b></div>
+        <div><b>周云燕课题组（ZyyLab），浙江工业大学药学院、绿色制药协同创新中心</b></div>
 
         <div>Journal</div>
         <div>《生物工程学报》</div>
