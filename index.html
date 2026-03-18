@@ -39,18 +39,18 @@
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      min-width: 260px;
+      min-width: 220px;
     }
     .logo{
-      width:28px;
-      height:28px;
-      border-radius:8px;
+      width:34px;              /* was 28 */
+      height:34px;             /* was 28 */
+      border-radius:10px;      /* slightly larger radius */
       display:block;
-      box-shadow: 0 6px 18px rgba(43,111,255,.18);
+      box-shadow: 0 8px 22px rgba(43,111,255,.18);
       flex: 0 0 auto;
     }
     .brandText{ display:flex; flex-direction:column; line-height:1.12; }
-    .brandText strong{ letter-spacing:.2px; font-size:15px; }
+    .brandText strong{ letter-spacing:.2px; font-size:16px; }  /* slight bump */
     .small{ font-size:12.5px; color: var(--muted); }
 
     .nav{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
@@ -251,7 +251,7 @@
         <img class="logo" src="assets/logo.svg" alt="MicroAMP logo">
         <div class="brandText">
           <strong>MicroAMP</strong>
-          <span class="small">ZyyLab（周云燕课题组）</span>
+          <!-- removed: ZyyLab（周云燕课题组） -->
         </div>
       </div>
       <div class="nav">
@@ -360,7 +360,7 @@
         <div><b>郭筱雅#，莫楠楠#，付腾腾#，赖倚琼，侯心怡，周云燕*</b></div>
 
         <div>Affiliation</div>
-        <div><b>浙江工业大学药学院、绿色制药协同创新中心</b></div>
+        <div><b>周云燕课题组（ZyyLab），浙江工业大学药学院、绿色制药协同创新中心</b></div>
 
         <div>Journal</div>
         <div>《生物工程学报》</div>
@@ -378,224 +378,70 @@
   </div>
 
 <script>
-  // =========================
-  // Data (Ref 字段已删除)
-  // =========================
   const tools = [
-    {
-      stage: ["AMP prediction"],
-      tool: "AMP Scanner v2",
-      function: "Antimicrobial peptide prediction",
-      features: "Deep Neural Network (CNN + Bi-LSTM), automatic feature learning, high prediction confidence.",
-      scenarios: "Scenarios requiring high-precision screening and priority ranking.",
-      website: "https://www.dveltri.com/ascan/v2/"
-    },
-    {
-      stage: ["AMP prediction"],
-      tool: "Macrel",
-      function: "Antimicrobial peptide prediction",
-      features: "Random Forest classifier based on 22 refined features, end-to-end pipeline, conservative predictions.",
-      scenarios: "Systematic preliminary mining with low false positives in complex data like metagenomes.",
-      website: "https://github.com/BigDataBiology/macrel"
-    },
-    {
-      stage: ["AMP prediction"],
-      tool: "AmPEP",
-      function: "Antimicrobial peptide prediction",
-      features: "Employs 105 distribution descriptors and Random Forest algorithm, suitable for scenarios requiring physicochemical understanding and strong feature interpretability.",
-      scenarios: "Prediction scenarios requiring understanding of physicochemical property contributions, providing a unique analytical perspective.",
-      website: "https://github.com/tlawrence3/amPEPpy"
-    },
-    {
-      stage: ["ORF/smORF"],
-      tool: "Prodigal",
-      function: "Gene prediction and ORF identification",
-      features: "Efficient prokaryotic gene prediction algorithm based on dynamic programming.",
-      scenarios: "The first step in processing prokaryotic genome or metagenome-assembled sequences.",
-      website: "https://github.com/hyattpd/Prodigal"
-    },
-    {
-      stage: ["ORF/smORF"],
-      tool: "SmORFinder",
-      function: "SmORF prediction and annotation",
-      features: "Combines Hidden Markov Models with deep learning models.",
-      scenarios: "Specifically identifies smORFs that may encode functional small peptides (e.g., antimicrobial peptides).",
-      website: "https://github.com/bhattlab/SmORFinder"
-    },
-    {
-      stage: ["Clustering"],
-      tool: "CD-HIT",
-      function: "Sequence clustering and redundancy removal",
-      features: "Fast clustering algorithm based on short word filtering, efficient for large-scale sequence processing.",
-      scenarios: "Redundancy removal for massive sequences before or after prediction to reduce computational burden.",
-      website: "http://weizhong-lab.ucsd.edu/cdhit_suite"
-    },
-    {
-      stage: ["Similarity"],
-      tool: "BLAST",
-      function: "Sequence alignment and similarity search",
-      features: "Classic heuristic algorithm based on local alignment.",
-      scenarios: "Assessing sequence novelty, functional annotation, and homologous sequence search.",
-      website: "https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/"
-    },
-    {
-      stage: ["Structure"],
-      tool: "ColabFold",
-      function: "Protein structure prediction",
-      features: "Integrates MMseqs2 for fast homology search with AlphaFold2/RoseTTAFold.",
-      scenarios: "Scenarios requiring efficient, free, and batch protein structure prediction.",
-      website: "https://github.com/sokrypton/ColabFold"
-    },
-    {
-      stage: ["Structure"],
-      tool: "RoseTTAFold2",
-      function: "Protein structure prediction",
-      features: "Neural network based on a three-track architecture, offering a good balance between accuracy and speed.",
-      scenarios: "Predicting protein monomer and complex structures, particularly adept at large complexes.",
-      website: "https://github.com/uw-ipd/RoseTTAFold2"
-    },
-    {
-      stage: ["Structure"],
-      tool: "AlphaFold3",
-      function: "Protein structure prediction",
-      features: "Next-generation diffusion model capable of predicting complexes including proteins, nucleic acids, and small molecule ligands.",
-      scenarios: "Predicting complex biomolecular structures and interactions involving non-protein components.",
-      website: "https://github.com/google-deepmind/alphafold3"
-    }
+    { stage:["AMP prediction"], tool:"AMP Scanner v2", function:"Antimicrobial peptide prediction",
+      features:"Deep Neural Network (CNN + Bi-LSTM), automatic feature learning, high prediction confidence.",
+      scenarios:"Scenarios requiring high-precision screening and priority ranking.", website:"https://www.dveltri.com/ascan/v2/" },
+    { stage:["AMP prediction"], tool:"Macrel", function:"Antimicrobial peptide prediction",
+      features:"Random Forest classifier based on 22 refined features, end-to-end pipeline, conservative predictions.",
+      scenarios:"Systematic preliminary mining with low false positives in complex data like metagenomes.", website:"https://github.com/BigDataBiology/macrel" },
+    { stage:["AMP prediction"], tool:"AmPEP", function:"Antimicrobial peptide prediction",
+      features:"Employs 105 distribution descriptors and Random Forest algorithm, suitable for scenarios requiring physicochemical understanding and strong feature interpretability.",
+      scenarios:"Prediction scenarios requiring understanding of physicochemical property contributions, providing a unique analytical perspective.", website:"https://github.com/tlawrence3/amPEPpy" },
+    { stage:["ORF/smORF"], tool:"Prodigal", function:"Gene prediction and ORF identification",
+      features:"Efficient prokaryotic gene prediction algorithm based on dynamic programming.",
+      scenarios:"The first step in processing prokaryotic genome or metagenome-assembled sequences.", website:"https://github.com/hyattpd/Prodigal" },
+    { stage:["ORF/smORF"], tool:"SmORFinder", function:"SmORF prediction and annotation",
+      features:"Combines Hidden Markov Models with deep learning models.",
+      scenarios:"Specifically identifies smORFs that may encode functional small peptides (e.g., antimicrobial peptides).", website:"https://github.com/bhattlab/SmORFinder" },
+    { stage:["Clustering"], tool:"CD-HIT", function:"Sequence clustering and redundancy removal",
+      features:"Fast clustering algorithm based on short word filtering, efficient for large-scale sequence processing.",
+      scenarios:"Redundancy removal for massive sequences before or after prediction to reduce computational burden.", website:"http://weizhong-lab.ucsd.edu/cdhit_suite" },
+    { stage:["Similarity"], tool:"BLAST", function:"Sequence alignment and similarity search",
+      features:"Classic heuristic algorithm based on local alignment.",
+      scenarios:"Assessing sequence novelty, functional annotation, and homologous sequence search.", website:"https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/" },
+    { stage:["Structure"], tool:"ColabFold", function:"Protein structure prediction",
+      features:"Integrates MMseqs2 for fast homology search with AlphaFold2/RoseTTAFold.",
+      scenarios:"Scenarios requiring efficient, free, and batch protein structure prediction.", website:"https://github.com/sokrypton/ColabFold" },
+    { stage:["Structure"], tool:"RoseTTAFold2", function:"Protein structure prediction",
+      features:"Neural network based on a three-track architecture, offering a good balance between accuracy and speed.",
+      scenarios:"Predicting protein monomer and complex structures, particularly adept at large complexes.", website:"https://github.com/uw-ipd/RoseTTAFold2" },
+    { stage:["Structure"], tool:"AlphaFold3", function:"Protein structure prediction",
+      features:"Next-generation diffusion model capable of predicting complexes including proteins, nucleic acids, and small molecule ligands.",
+      scenarios:"Predicting complex biomolecular structures and interactions involving non-protein components.", website:"https://github.com/google-deepmind/alphafold3" }
   ];
 
   const databases = [
-    {
-      stage: ["Database"],
-      db: "CAMP-R4",
-      entries: "11827",
-      access: "Yes",
-      website: "http://camp.bicnirrh.res.in/",
-      update: "2022",
-      coverage: "Comprehensive database and prediction platform, covering natural and synthetic peptides."
-    },
-    {
-      stage: ["Database"],
-      db: "dbAMP",
-      entries: "35518",
-      access: "Yes",
-      website: "https://awi.cuhk.edu.cn/dbAMP/",
-      update: "2024",
-      coverage: "Comprehensive database and multifunctional platform, integrating a full suite of tools for discovery, prediction, optimization, and toxicity assessment."
-    },
-    {
-      stage: ["Database"],
-      db: "DBAASP",
-      entries: "23688",
-      access: "Yes",
-      website: "https://www.dbaasp.org/home",
-      update: "--",
-      coverage: "Experimental activity and structural information database, providing detailed experimental data such as antimicrobial, hemolytic, and cytotoxic activities."
-    },
-    {
-      stage: ["Database"],
-      db: "AMPSphere",
-      entries: "863498",
-      access: "Yes",
-      website: "https://ampsphere.big-data-biology.org/",
-      update: "2024",
-      coverage: "Metagenome-derived antimicrobial peptide database, sourced from large-scale global microbiome mining."
-    },
-    {
-      stage: ["Database"],
-      db: "DRAMP",
-      entries: "30260",
-      access: "Yes",
-      website: "http://dramp.cpu-bioinfor.org/",
-      update: "2023",
-      coverage: "General comprehensive antimicrobial peptide database, containing information on natural, synthetic, and clinically investigational peptides."
-    },
-    {
-      stage: ["Database"],
-      db: "APD",
-      entries: "6309",
-      access: "Yes",
-      website: "https://aps.unmc.edu",
-      update: "Continuously Updated",
-      coverage: "Comprehensive database focused on natural antimicrobial peptides, containing detailed sequence, activity, and structural annotations."
-    },
-    {
-      stage: ["Database"],
-      db: "Cybase",
-      entries: "--",
-      access: "Yes",
-      website: "https://www.cybase.org.au",
-      update: "2026-02-09",
-      coverage: "Specialized database for cyclic peptides (rich in disulfide bonds)."
-    },
-    {
-      stage: ["Database"],
-      db: "PlantPepDB",
-      entries: "3848",
-      access: "Yes",
-      website: "http://14.139.61.8/PlantPepDB/index.php",
-      update: "2020",
-      coverage: "Specialized database for plant-derived antimicrobial peptides."
-    },
-    {
-      stage: ["Database"],
-      db: "BaAMPs",
-      entries: "221",
-      access: "No (Historical)",
-      website: "http://www.baamps.it",
-      update: "--",
-      coverage: "Database for antimicrobial peptides with biofilm-inhibiting activity."
-    },
-    {
-      stage: ["Database"],
-      db: "BACTIBASE",
-      entries: "123",
-      access: "No (Historical)",
-      website: "http://bactibase.pfba-lab-tun.org",
-      update: "--",
-      coverage: "Database for bacteriocins (primarily targeting Gram-positive bacteria)."
-    },
-    {
-      stage: ["Database"],
-      db: "YADAMP",
-      entries: "2133",
-      access: "Limited Functionality",
-      website: "http://www.yadamp.unisa.it",
-      update: "--",
-      coverage: "General antimicrobial peptide database, providing only data browsing."
-    },
-    {
-      stage: ["Database"],
-      db: "CAMP (Old version)",
-      entries: "10247",
-      access: "No (Historical)",
-      website: "http://camp.bicnirrh.res.in/",
-      update: "--",
-      coverage: "Early general antimicrobial peptide database."
-    },
-    {
-      stage: ["Database"],
-      db: "DAMPD",
-      entries: "2571",
-      access: "No (Historical)",
-      website: "http://apps.sanbi.ac.za/dampd/",
-      update: "--",
-      coverage: "Early antimicrobial peptide database."
-    },
-    {
-      stage: ["Database"],
-      db: "LAMP",
-      entries: "5547",
-      access: "No (Historical)",
-      website: "http://biotechlab.fudan.edu.cn/database/lamp",
-      update: "--",
-      coverage: "Early antimicrobial peptide database."
-    }
+    { stage:["Database"], db:"CAMP-R4", entries:"11827", access:"Yes", website:"http://camp.bicnirrh.res.in/", update:"2022",
+      coverage:"Comprehensive database and prediction platform, covering natural and synthetic peptides." },
+    { stage:["Database"], db:"dbAMP", entries:"35518", access:"Yes", website:"https://awi.cuhk.edu.cn/dbAMP/", update:"2024",
+      coverage:"Comprehensive database and multifunctional platform, integrating a full suite of tools for discovery, prediction, optimization, and toxicity assessment." },
+    { stage:["Database"], db:"DBAASP", entries:"23688", access:"Yes", website:"https://www.dbaasp.org/home", update:"--",
+      coverage:"Experimental activity and structural information database, providing detailed experimental data such as antimicrobial, hemolytic, and cytotoxic activities." },
+    { stage:["Database"], db:"AMPSphere", entries:"863498", access:"Yes", website:"https://ampsphere.big-data-biology.org/", update:"2024",
+      coverage:"Metagenome-derived antimicrobial peptide database, sourced from large-scale global microbiome mining." },
+    { stage:["Database"], db:"DRAMP", entries:"30260", access:"Yes", website:"http://dramp.cpu-bioinfor.org/", update:"2023",
+      coverage:"General comprehensive antimicrobial peptide database, containing information on natural, synthetic, and clinically investigational peptides." },
+    { stage:["Database"], db:"APD", entries:"6309", access:"Yes", website:"https://aps.unmc.edu", update:"Continuously Updated",
+      coverage:"Comprehensive database focused on natural antimicrobial peptides, containing detailed sequence, activity, and structural annotations." },
+    { stage:["Database"], db:"Cybase", entries:"--", access:"Yes", website:"https://www.cybase.org.au", update:"2026-02-09",
+      coverage:"Specialized database for cyclic peptides (rich in disulfide bonds)." },
+    { stage:["Database"], db:"PlantPepDB", entries:"3848", access:"Yes", website:"http://14.139.61.8/PlantPepDB/index.php", update:"2020",
+      coverage:"Specialized database for plant-derived antimicrobial peptides." },
+    { stage:["Database"], db:"BaAMPs", entries:"221", access:"No (Historical)", website:"http://www.baamps.it", update:"--",
+      coverage:"Database for antimicrobial peptides with biofilm-inhibiting activity." },
+    { stage:["Database"], db:"BACTIBASE", entries:"123", access:"No (Historical)", website:"http://bactibase.pfba-lab-tun.org", update:"--",
+      coverage:"Database for bacteriocins (primarily targeting Gram-positive bacteria)." },
+    { stage:["Database"], db:"YADAMP", entries:"2133", access:"Limited Functionality", website:"http://www.yadamp.unisa.it", update:"--",
+      coverage:"General antimicrobial peptide database, providing only data browsing." },
+    { stage:["Database"], db:"CAMP (Old version)", entries:"10247", access:"No (Historical)", website:"http://camp.bicnirrh.res.in/", update:"--",
+      coverage:"Early general antimicrobial peptide database." },
+    { stage:["Database"], db:"DAMPD", entries:"2571", access:"No (Historical)", website:"http://apps.sanbi.ac.za/dampd/", update:"--",
+      coverage:"Early antimicrobial peptide database." },
+    { stage:["Database"], db:"LAMP", entries:"5547", access:"No (Historical)", website:"http://biotechlab.fudan.edu.cn/database/lamp", update:"--",
+      coverage:"Early antimicrobial peptide database." }
   ];
 
-  // =========================
-  // Helpers
-  // =========================
   function esc(s){
     return String(s ?? "")
       .replaceAll("&","&amp;")
@@ -604,7 +450,6 @@
       .replaceAll('"',"&quot;")
       .replaceAll("'","&#039;");
   }
-
   function blobTool(r){
     return `${r.tool} ${r.function} ${r.features} ${r.scenarios} ${r.website} ${r.stage.join(" ")}`.toLowerCase();
   }
@@ -636,9 +481,6 @@
     URL.revokeObjectURL(url);
   }
 
-  // =========================
-  // Rendering
-  // =========================
   let lastToolsFiltered = [];
   let lastDbFiltered = [];
 
@@ -647,13 +489,9 @@
     const activeChip = document.querySelector(".chip.active").dataset.stage;
     const matchStage = (rowStages) => (activeChip === "ALL") || rowStages.includes(activeChip);
 
-    // Tools
     const toolsBody = document.querySelector("#toolsTable tbody");
     toolsBody.innerHTML = "";
-
-    const toolsFiltered = tools
-      .filter(r => matchStage(r.stage))
-      .filter(r => blobTool(r).includes(q));
+    const toolsFiltered = tools.filter(r => matchStage(r.stage)).filter(r => blobTool(r).includes(q));
     lastToolsFiltered = toolsFiltered;
 
     const toolsEmpty = document.getElementById("toolsEmpty");
@@ -675,13 +513,9 @@
       });
     }
 
-    // Databases
     const dbBody = document.querySelector("#dbTable tbody");
     dbBody.innerHTML = "";
-
-    const dbFiltered = databases
-      .filter(r => matchStage(r.stage))
-      .filter(r => blobDB(r).includes(q));
+    const dbFiltered = databases.filter(r => matchStage(r.stage)).filter(r => blobDB(r).includes(q));
     lastDbFiltered = dbFiltered;
 
     const dbEmpty = document.getElementById("dbEmpty");
@@ -703,16 +537,12 @@
       });
     }
 
-    // counts
     document.getElementById("countTools").textContent = tools.length;
     document.getElementById("countDb").textContent = databases.length;
     document.getElementById("countToolsFiltered").textContent = toolsFiltered.length;
     document.getElementById("countDbFiltered").textContent = dbFiltered.length;
   }
 
-  // =========================
-  // Interactions
-  // =========================
   document.getElementById("q").addEventListener("input", render);
   document.querySelectorAll(".chip").forEach(chip => {
     chip.addEventListener("click", () => {
@@ -722,7 +552,6 @@
     });
   });
 
-  // Copy citation
   document.getElementById("copyCiteBtn").addEventListener("click", async () => {
     const citation = [
       "郭筱雅#, 莫楠楠#, 付腾腾#, 赖倚琼, 侯心怡, 周云燕*. 基于人工智能技术挖掘微生物组中的抗菌肽. 生物工程学报.",
@@ -739,7 +568,6 @@
     }
   });
 
-  // Download filtered CSV
   document.getElementById("downloadToolsBtn").addEventListener("click", () => {
     const rows = lastToolsFiltered.map(r => ({
       stage: r.stage.join("; "),
